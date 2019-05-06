@@ -1,4 +1,5 @@
-﻿using NeuralNetworkNET.APIs;
+﻿using IrisForm.Datasets;
+using NeuralNetworkNET.APIs;
 using NeuralNetworkNET.APIs.Enums;
 using NeuralNetworkNET.APIs.Interfaces;
 using NeuralNetworkNET.APIs.Structs;
@@ -8,13 +9,13 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IrisForm.Datasets;
 
 namespace IrisForm
 {
     public partial class Form1 : Form
     {
         private INeuralNetwork _neuralNetwork;
+        private const int ITERACIONES = 5000;
 
         public Form1()
         {
@@ -26,7 +27,7 @@ namespace IrisForm
             _neuralNetwork = NetworkManager.NewSequential(TensorInfo.Linear(4),
                 NetworkLayers.FullyConnected(8, ActivationType.ReLU, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero),
                 NetworkLayers.FullyConnected(3, ActivationType.Sigmoid, CostFunctionType.CrossEntropy, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero));
-                //NetworkLayers.Softmax(3, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Gaussian));
+            //NetworkLayers.Softmax(3, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Gaussian));
 
             /*
             _neuralNetwork = NetworkManager.NewGraph(TensorInfo.Linear(4), builder =>
@@ -45,6 +46,7 @@ namespace IrisForm
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
+            button3.Focus();
             txtMonitor.Text = string.Empty;
 
             var dataset = new Dataset();
@@ -56,7 +58,7 @@ namespace IrisForm
                 _neuralNetwork,
                 datasets.Training,
                 TrainingAlgorithms.Momentum(0.003f, 0.5f, 0.1f), //StochasticGradientDescent(0.003f, 0.5f),
-                5000,
+                ITERACIONES,
                 0.999f,
                 null,
                 MonitorearIteraciones,
@@ -66,17 +68,16 @@ namespace IrisForm
 
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;
-
-                if (this.IsHandleCreated)
-                {
-                    this.Invoke(new Action(() => { txtMonitor.Text += _monitorLog; }));
-                }
             });
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            _cancellationTokenSource.Cancel(false);
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel(false);
+                MostrarLog();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -124,10 +125,24 @@ namespace IrisForm
                 {
                     var msj = $"Iteración: {trainingProgress.Iteration}, Exactitud: {trainingProgress.Result.Accuracy}%, Costo: {trainingProgress.Result.Cost}" + Environment.NewLine;
                     _monitorLog += msj;
+
                     txtMonitor.Text = msj;
                     txtMonitor.Refresh();
                 }));
+
+                if (trainingProgress.Iteration == ITERACIONES)
+                {
+                    MostrarLog();
+                }
             });
+        }
+
+        private void MostrarLog()
+        {
+            if (this.IsHandleCreated)
+            {
+                this.Invoke(new Action(() => { txtMonitor.Text += _monitorLog; }));
+            }
         }
     }
 }
