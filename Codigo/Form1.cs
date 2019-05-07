@@ -29,8 +29,8 @@ namespace IrisForm
         private void Form1_Load(object sender, EventArgs e)
         {
             _neuralNetwork = NetworkManager.NewSequential(TensorInfo.Linear(4),
-                NetworkLayers.FullyConnected(8, ActivationType.ReLU, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero),
-                NetworkLayers.FullyConnected(3, ActivationType.Sigmoid, CostFunctionType.CrossEntropy, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero));
+                NetworkLayers.FullyConnected(8, ActivationType.ReLU, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Gaussian),
+                NetworkLayers.FullyConnected(3, ActivationType.Sigmoid, CostFunctionType.CrossEntropy, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Gaussian));
         }
 
         private async void btnEntrenar_Click(object sender, EventArgs e)
