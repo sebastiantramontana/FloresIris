@@ -20,8 +20,9 @@ namespace IrisForm
                     salida = new[] { 0f, 0f, 1f };
                     break;
                 case TipoIris.Desconocida:
-                default:
                     throw new InvalidOperationException("No se puede convertir una salida softmax de un tipo de iris desconocido");
+                default:
+                    throw new NotImplementedException($"Tipo de iris no implementado: {tipoIris}");
             }
 
             return salida;

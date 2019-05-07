@@ -17,6 +17,10 @@ namespace IrisForm
         private INeuralNetwork _neuralNetwork;
         private const int ITERACIONES = 5000;
 
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _entrenando = false;
+        private string _monitorLog = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,37 +31,28 @@ namespace IrisForm
             _neuralNetwork = NetworkManager.NewSequential(TensorInfo.Linear(4),
                 NetworkLayers.FullyConnected(8, ActivationType.ReLU, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero),
                 NetworkLayers.FullyConnected(3, ActivationType.Sigmoid, CostFunctionType.CrossEntropy, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Zero));
-            //NetworkLayers.Softmax(3, WeightsInitializationMode.LeCunUniform, BiasInitializationMode.Gaussian));
-
-            /*
-            _neuralNetwork = NetworkManager.NewGraph(TensorInfo.Linear(4), builder =>
-                   {
-                       var relu = builder.Layer(NetworkLayers.FullyConnected(4, ActivationType.ReLU));
-                       var sigmoid = builder.Layer(NetworkLayers.FullyConnected(4, ActivationType.Sigmoid));
-
-                       var sum = relu + sigmoid;
-                       sum.Layer(NetworkLayers.FullyConnected(3, ActivationType.Sigmoid, CostFunctionType.CrossEntropy));
-                   });
-                  */
         }
 
-        private CancellationTokenSource _cancellationTokenSource;
-        private async void button1_Click(object sender, EventArgs e)
+        private async void btnEntrenar_Click(object sender, EventArgs e)
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
-            button3.Focus();
+            btnCancelar.Focus();
             txtMonitor.Text = string.Empty;
+            _monitorLog = string.Empty;
 
             var dataset = new Dataset();
             var datasets = dataset.Cargar();
+
+            _entrenando = true;
+            HabilitarBotones(false);
 
             await Task.Run(() =>
             {
                 NetworkManager.TrainNetwork(
                 _neuralNetwork,
                 datasets.Training,
-                TrainingAlgorithms.Momentum(0.003f, 0.5f, 0.1f), //StochasticGradientDescent(0.003f, 0.5f),
+                TrainingAlgorithms.Momentum(0.003f, 0.5f, 0.1f),
                 ITERACIONES,
                 0.999f,
                 null,
@@ -66,21 +61,35 @@ namespace IrisForm
                 datasets.Test,
                 _cancellationTokenSource.Token);
 
+                _entrenando = false;
+
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;
+
+                MostrarLog();
+                HabilitarBotones(true);
+                EjecutarActionUI(() => { btnPredecir.Focus(); });
             });
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void HabilitarBotones(bool listoParaPredecir)
         {
-            if (_cancellationTokenSource != null)
+            Action action = () =>
             {
-                _cancellationTokenSource.Cancel(false);
-                MostrarLog();
-            }
+                btnEntrenar.Enabled = !(btnCancelar.Enabled = _entrenando);
+                btnPredecir.Enabled = listoParaPredecir;
+            };
+
+            EjecutarActionUI(action);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (_entrenando == true)
+                _cancellationTokenSource.Cancel();
+        }
+
+        private void btnPredecir_Click(object sender, EventArgs e)
         {
             var sepalLength = ParsearControlInput(txtSepalLength);
             if (float.IsNaN(sepalLength))
@@ -116,32 +125,33 @@ namespace IrisForm
             return valor;
         }
 
-        private string _monitorLog = string.Empty;
-        private async void MonitorearIteraciones(TrainingProgressEventArgs trainingProgress)
+        private void MonitorearIteraciones(TrainingProgressEventArgs trainingProgress)
         {
-            await Task.Run(() =>
+            if (_entrenando == false) //puede quedar el thread andando pese a la finalización o cancelacion
+                return;
+
+            EjecutarActionUI(() =>
             {
-                this.Invoke(new Action(() =>
-                {
-                    var msj = $"Iteración: {trainingProgress.Iteration}, Exactitud: {trainingProgress.Result.Accuracy}%, Costo: {trainingProgress.Result.Cost}" + Environment.NewLine;
-                    _monitorLog += msj;
-
-                    txtMonitor.Text = msj;
-                    txtMonitor.Refresh();
-                }));
-
-                if (trainingProgress.Iteration == ITERACIONES)
-                {
-                    MostrarLog();
-                }
+                var msj = $"Iteración: {trainingProgress.Iteration}, Exactitud: {trainingProgress.Result.Accuracy}%, Costo: {trainingProgress.Result.Cost}" + Environment.NewLine;
+                _monitorLog += msj;
+                txtMonitor.Text = msj;
             });
         }
 
         private void MostrarLog()
         {
+            Action action = () => { txtMonitor.Text += _monitorLog; };
+            EjecutarActionUI(action);
+        }
+
+        private void EjecutarActionUI(Action action)
+        {
             if (this.IsHandleCreated)
             {
-                this.Invoke(new Action(() => { txtMonitor.Text += _monitorLog; }));
+                if (this.InvokeRequired)
+                    this.Invoke(action);
+                else
+                    action();
             }
         }
     }
