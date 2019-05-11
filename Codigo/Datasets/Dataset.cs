@@ -1,4 +1,5 @@
-﻿using FloresIris.Properties;
+﻿using IrisForm.Dominio;
+using IrisForm.Properties;
 using NeuralNetworkNET.APIs;
 using NeuralNetworkNET.APIs.Interfaces.Data;
 using System;

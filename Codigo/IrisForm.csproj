@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{71664293-C2BB-4A7A-BCC8-FE6B673B3F10}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FloresIris</RootNamespace>
+    <RootNamespace>IrisForm</RootNamespace>
     <AssemblyName>FloresIris</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +35,7 @@
     <ErrorReport>none</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -92,18 +94,28 @@
   <ItemGroup>
     <Compile Include="Datasets\Dataset.cs" />
     <Compile Include="Datasets\DatasetNeuralNetworkNet.cs" />
+    <Compile Include="EnumInfo.cs" />
+    <Compile Include="Extensiones.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Iris.cs" />
+    <Compile Include="Dominio\Iris.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\AdaDelta.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\AdaGrad.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\Adam.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\AdaMax.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\IAlgoritmoParametros.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\Momentum.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\RMSProp.cs" />
+    <Compile Include="ParametrosAlgoritmosEntrenamiento\StochasticGradientDescent.cs" />
     <Compile Include="Prediccion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoIris.cs" />
-    <Compile Include="TipoIrisExtensiones.cs" />
+    <Compile Include="Dominio\TipoIris.cs" />
+    <Compile Include="Dominio\TipoIrisExtensiones.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

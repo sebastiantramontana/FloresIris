@@ -1,4 +1,6 @@
-﻿namespace IrisForm
+﻿using IrisForm.Dominio;
+
+namespace IrisForm
 {
     public class Prediccion
     {
