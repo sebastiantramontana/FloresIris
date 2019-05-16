@@ -5,6 +5,63 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IrisForm", "Codigo\IrisForm.csproj", "{71664293-C2BB-4A7A-BCC8-FE6B673B3F10}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NeuralNetworkVisualizer", "NeuralNetworkVisualizer", "{A30AFE35-1169-4AD7-8E80-087AAA29EEF5}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkVisualizer\NeuralNetworkModel.dll = NeuralNetworkVisualizer\NeuralNetworkModel.dll
+		NeuralNetworkVisualizer\NeuralNetworkVisualizer.dll = NeuralNetworkVisualizer\NeuralNetworkVisualizer.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NeuralNetworkNet", "NeuralNetworkNet", "{A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.dll = NeuralNetworkNet\Alea.dll
+		NeuralNetworkNet\Alea.IL.dll = NeuralNetworkNet\Alea.IL.dll
+		NeuralNetworkNet\Alea.Parallel.dll = NeuralNetworkNet\Alea.Parallel.dll
+		NeuralNetworkNet\Alea.xml = NeuralNetworkNet\Alea.xml
+		NeuralNetworkNet\NeuralNetwork.NET.deps.json = NeuralNetworkNet\NeuralNetwork.NET.deps.json
+		NeuralNetworkNet\NeuralNetwork.NET.dll = NeuralNetworkNet\NeuralNetwork.NET.dll
+		NeuralNetworkNet\NeuralNetwork.NET.dll.config = NeuralNetworkNet\NeuralNetwork.NET.dll.config
+		NeuralNetworkNet\NeuralNetwork.NET.xml = NeuralNetworkNet\NeuralNetwork.NET.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alea.CUDA.CT.LibDevice", "Alea.CUDA.CT.LibDevice", "{DF8F4946-0152-493C-9268-DD9E04AEB5DB}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_20.bc = NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_20.bc
+		NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_30.bc = NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_30.bc
+		NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_35.bc = NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_35.bc
+		NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_50.bc = NeuralNetworkNet\Alea.CUDA.CT.LibDevice\libdevice.compute_50.bc
+		NeuralNetworkNet\Alea.CUDA.CT.LibDevice\version = NeuralNetworkNet\Alea.CUDA.CT.LibDevice\version
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alea.CUDA.CT.Native.X86.B32.Windows", "Alea.CUDA.CT.Native.X86.B32.Windows", "{A0E3B9F4-CFBF-4816-BD19-38D0E166CDD9}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\aleallvm.dll = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\aleallvm.dll
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\aleanvvm.dll = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\aleanvvm.dll
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\version = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B32.Windows\version
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alea.CUDA.CT.Native.X86.B64.Windows", "Alea.CUDA.CT.Native.X86.B64.Windows", "{38864728-B71A-4609-9D5F-F914124D7788}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\aleallvm.dll = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\aleallvm.dll
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\aleanvvm.dll = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\aleanvvm.dll
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\version = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Windows\version
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alea.CUDA.CT.Native.X86.B64.Linux", "Alea.CUDA.CT.Native.X86.B64.Linux", "{A8BC8F49-8F2B-4D3B-BDA9-08D4CF642273}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\aleanvvm = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\aleanvvm
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\libaleallvm.so = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\libaleallvm.so
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\libaleanvvm.so = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\libaleanvvm.so
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\version = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.Linux\version
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alea.CUDA.CT.Native.X86.B64.MacOSX", "Alea.CUDA.CT.Native.X86.B64.MacOSX", "{B7CBD5DF-48E7-4A22-A0A6-657ACD25638D}"
+	ProjectSection(SolutionItems) = preProject
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\aleanvvm = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\aleanvvm
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\libaleallvm.dylib = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\libaleallvm.dylib
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\libaleanvvm.dylib = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\libaleanvvm.dylib
+		NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\version = NeuralNetworkNet\Alea.CUDA.CT.Native.X86.B64.MacOSX\version
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +75,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DF8F4946-0152-493C-9268-DD9E04AEB5DB} = {A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}
+		{A0E3B9F4-CFBF-4816-BD19-38D0E166CDD9} = {A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}
+		{38864728-B71A-4609-9D5F-F914124D7788} = {A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}
+		{A8BC8F49-8F2B-4D3B-BDA9-08D4CF642273} = {A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}
+		{B7CBD5DF-48E7-4A22-A0A6-657ACD25638D} = {A31D4D8F-E918-4BAE-ADC4-29DBF9067D5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78CFAB18-2520-4BC7-BFA8-F53CB327C322}

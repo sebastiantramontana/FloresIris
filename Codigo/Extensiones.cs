@@ -1,4 +1,5 @@
 ﻿using FloresForm.ParametrosAlgoritmosEntrenamiento;
+using NeuralNetworkModel.Model;
 using NeuralNetworkNET.APIs.Enums;
 using NeuralNetworkNET.Networks.Cost;
 using NeuralNetworkNET.SupervisedLearning.Algorithms;
@@ -9,6 +10,33 @@ namespace IrisForm
 {
     public static class Extensiones
     {
+        public static ActivationFunction Map(this ActivationType activationType)
+        {
+            switch (activationType)
+            {
+                case ActivationType.Sigmoid:
+                    return ActivationFunction.Sigmoid;
+                case ActivationType.Tanh:
+                case ActivationType.LeCunTanh:
+                    return ActivationFunction.Tanh;
+                case ActivationType.ReLU:
+                case ActivationType.ELU:
+                case ActivationType.AbsoluteReLU:
+                case ActivationType.Softplus:
+                    return ActivationFunction.Relu;
+                case ActivationType.LeakyReLU:
+                    return ActivationFunction.LeakyRelu;
+                case ActivationType.Softmax:
+                    return ActivationFunction.Softmax;
+                case ActivationType.Identity:
+                    return ActivationFunction.Linear;
+                default:
+                    break;
+            }
+
+            throw new NotImplementedException($"Función de activación no implementada: {activationType}");
+        }
+
         public static IEnumerable<EnumInfo<CostFunctionType>> GetCostFunctionsPermitidas(this EnumInfo<ActivationType> activationFunction)
         {
             switch (activationFunction.Valor)
