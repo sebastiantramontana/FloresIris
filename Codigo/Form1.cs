@@ -66,8 +66,13 @@ namespace IrisForm
                 () => new TextPreference { Brush = new SolidBrushPreference(Color.Black) },
                 () => new TextPreference { Brush = new SolidBrushPreference(Color.Black) });
 
+            neuralNetworkVisualizerControl1.Preferences.Edges.Connector = new ByValueSignFormatter<Pen>(
+                () => new Pen(Color.Red),
+                () => new Pen(Color.LightSteelBlue),
+                () => new Pen(Color.Black),
+                () => new Pen(Color.Gray));
+
             neuralNetworkVisualizerControl1.Preferences.Layers.Title = null;
-            neuralNetworkVisualizerControl1.Preferences.Edges.Connector = new CustomFormatter<Pen>((v) => v == 0.0 ? new Pen(Color.LightGray) : new Pen(Color.Black));
             neuralNetworkVisualizerControl1.Preferences.Quality = RenderQuality.High;
             neuralNetworkVisualizerControl1.Preferences.AsyncRedrawOnResize = false;
             neuralNetworkVisualizerControl1.Selectable = false;
