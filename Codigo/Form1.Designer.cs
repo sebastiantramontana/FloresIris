@@ -75,7 +75,7 @@
             this.txtVirginica = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtVersicolor = new System.Windows.Forms.TextBox();
-            this.neuralNetworkVisualizerControl1 = new NeuralNetworkModel.NeuralNetworkVisualizerControl();
+            this.neuralNetworkVisualizerControl1 = new NeuralNetworkVisualizer.NeuralNetworkVisualizerControl();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -719,7 +719,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtVersicolor;
         private System.Windows.Forms.PropertyGrid gridParametrosAlgoritmoEntrenamiento;
-        private NeuralNetworkModel.NeuralNetworkVisualizerControl neuralNetworkVisualizerControl1;
+        private NeuralNetworkVisualizer.NeuralNetworkVisualizerControl neuralNetworkVisualizerControl1;
         private System.Windows.Forms.Button btnZoomIn;
         private System.Windows.Forms.Button btnZoomOut;
     }
