@@ -386,6 +386,7 @@ namespace IrisForm
             var pesosBias = layer.Biases;
 
             var nodos = layerVisualizer.Nodes;
+            var nodosCount = nodos.Count();
             int i = 0;
 
             foreach (var nodo in nodos)
@@ -395,7 +396,7 @@ namespace IrisForm
 
                 for (int j = 0; j < edges.Length; ++j)
                 {
-                    edges[j].Weight = pesosNeuronas[j + i];
+                    edges[j].Weight = pesosNeuronas[i + j * nodosCount];
                 }
 
                 edgeBias.Weight = pesosBias[i];
