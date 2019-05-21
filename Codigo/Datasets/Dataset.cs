@@ -24,7 +24,7 @@ namespace IrisForm.Datasets
             var test = UnirTiposIrisEnDatasetEspecifo(new[] { setosas, versicolores, virginicas }, (irisesTipo) => irisesTipo.Test);
 
             var dataTraining = CrearDataset(training, (values) => DatasetLoader.Training(values, 50));
-            var dataTest = CrearDataset(training, (values) => DatasetLoader.Test(values, null));
+            var dataTest = CrearDataset(test, (values) => DatasetLoader.Test(values, null));
 
             return new DatasetNeuralNetworkNet(dataTraining, dataTest);
         }
