@@ -297,14 +297,68 @@ namespace IrisForm
                 return;
 
             var valoresSalida = _neuralNetwork.Forward(new[] { sepalLength, sepalWidth, petalLength, petalWidth });
-            //var resultado = new Prediccion(valoresSalida);
 
-            txtSetosa.Text = valoresSalida[0].ToString();
-            txtVersicolor.Text = valoresSalida[1].ToString();
-            txtVirginica.Text = valoresSalida[2].ToString();
+            MostrarValorSalida(new (Control Control, float Valor)[]
+            {
+                (txtSetosa,valoresSalida[0]),
+                (txtVersicolor,valoresSalida[1]),
+                (txtVirginica,valoresSalida[2])
+            });
 
             ActualizarNeuralNetworkVisualizerNodos();
             neuralNetworkVisualizerControl1.Redraw();
+        }
+
+        private void MostrarValorSalida(IEnumerable<(Control Control, float Valor)> valoresControl)
+        {
+            (Control Control, float Valor) maxValorControl = default;
+
+            foreach (var valorControl in valoresControl)
+            {
+                if (valorControl.Valor > maxValorControl.Valor)
+                {
+                    maxValorControl = valorControl;
+                }
+
+                valorControl.Control.BackColor = Color.Empty;
+                valorControl.Control.Font = new Font(valorControl.Control.Font, FontStyle.Regular);
+                valorControl.Control.Text = valorControl.Valor.ToString();
+            }
+
+            if (maxValorControl != default)
+            {
+                maxValorControl.Control.BackColor = DevolverColorSalida(maxValorControl.Valor);
+                maxValorControl.Control.Font = new Font(maxValorControl.Control.Font, FontStyle.Bold);
+            }
+        }
+
+        private Color DevolverColorSalida(float valor)
+        {
+            Color color;
+
+            switch (valor)
+            {
+                case float val when valor < 0.3f:
+                    color = Color.LightPink;
+                    break;
+                case float val when valor >= 0.3f && valor < 0.5f:
+                    color = Color.Orange;
+                    break;
+                case float val when valor >= 0.5f && valor < 0.7f:
+                    color = Color.LightYellow;
+                    break;
+                case float val when valor >= 0.7f && valor < 0.9f:
+                    color = Color.LightGreen;
+                    break;
+                case float val when valor >= 0.9f:
+                    color = Color.LightSkyBlue;
+                    break;
+                default:
+                    color = Color.Empty;
+                    break;
+            }
+
+            return color;
         }
 
         private float ParsearControlInput(Control control)
