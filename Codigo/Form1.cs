@@ -363,7 +363,7 @@ namespace IrisForm
 
         private float ParsearControlInput(Control control)
         {
-            if (!float.TryParse(control.Text, out var valor))
+            if (!float.TryParse(control.Text, out var valor) || valor < 0.0f)
             {
                 MessageBox.Show("El valor de entrada es inválido");
                 control.Focus();
