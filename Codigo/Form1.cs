@@ -373,10 +373,15 @@ namespace IrisForm
             return valor;
         }
 
+        private bool _monitoreando = false;
         private void MonitorearIteraciones(TrainingProgressEventArgs trainingProgress)
         {
-            if (_entrenando == false) //puede quedar el thread andando pese a la finalización o cancelacion
+            //!_entrenando: puede quedar el thread andando pese a la finalización o cancelacion
+            //_monitoreando: evitar blockeo UI asíncrono
+            if (!_entrenando || _monitoreando)
                 return;
+
+            _monitoreando = true;
 
             EjecutarActionUI(() =>
             {
@@ -386,6 +391,8 @@ namespace IrisForm
 
                 ActualizarNeuralNetworkVisualizerFull();
             });
+
+            _monitoreando = false;
         }
 
         private void MostrarLog(int totalIteraciones, DatasetEvaluationResult result)
